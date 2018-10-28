@@ -1,5 +1,6 @@
 package com.chetz.myapplication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.content.Intent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -95,6 +96,15 @@ public class MainActivity extends AppCompatActivity {
     public void submit() {
         if (edtUsername.getText().toString().equals(USERNAME) && edtPassword.getText().toString().equals(PASSWORD)) {
             Toast.makeText(MainActivity.this, "valid", Toast.LENGTH_LONG).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("myapplication", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("is_login", true);
+            editor.commit();
+
+            Intent calculatorIntent = new Intent(MainActivity.this, CalculatorActivity.class);
+            startActivity(calculatorIntent);
+            finish();
+
         } else {
             Toast.makeText(MainActivity.this, "invalid", Toast.LENGTH_LONG).show();
         }
