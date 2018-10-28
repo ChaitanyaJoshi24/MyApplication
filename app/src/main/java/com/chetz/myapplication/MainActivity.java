@@ -1,6 +1,8 @@
 package com.chetz.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -92,21 +94,85 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     @OnClick(R.id.btn_submit)
     public void submit() {
-        if (edtUsername.getText().toString().equals(USERNAME) && edtPassword.getText().toString().equals(PASSWORD)) {
-            Toast.makeText(MainActivity.this, "valid", Toast.LENGTH_LONG).show();
-            SharedPreferences sharedPreferences = getSharedPreferences("myapplication", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("is_login", true);
-            editor.commit();
 
-            Intent calculatorIntent = new Intent(MainActivity.this, CalculatorActivity.class);
-            startActivity(calculatorIntent);
-            finish();
+        AsyncTaskRunner asyncTaskRunner = new AsyncTaskRunner();
+        asyncTaskRunner.execute(edtUsername.getText().toString(), edtPassword.getText().toString());
 
-        } else {
-            Toast.makeText(MainActivity.this, "invalid", Toast.LENGTH_LONG).show();
+
+    }
+
+    private class AsyncTaskRunner extends AsyncTask<String, String, Boolean >{
+
+        private Boolean resp;
+        ProgressDialog progressDialog;
+
+        protected Boolean doInBackground(String... params) {
+            String username = params[0];
+            String password = params[1];
+
+            for (int i = 0; i < 10; i++) {
+
+                try {
+                    Thread.sleep(1000);
+                    if(i%3==0){
+                        publishProgress(""+i);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (username.equals(USERNAME) && password.equals(PASSWORD)){
+
+                resp = true;
+            }
+            else{
+                resp = false;
+            }
+            // Calls onProgressUpdate()
+            return resp;
+        }
+
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            // execution of result of Long time consuming operation
+            progressDialog.dismiss();
+
+            if (result == true) {
+                Toast.makeText(MainActivity.this, "valid", Toast.LENGTH_LONG).show();
+                SharedPreferences sharedPreferences = getSharedPreferences("myapplication", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("is_login", true);
+                editor.commit();
+
+                Intent calculatorIntent = new Intent(MainActivity.this, CalculatorActivity.class);
+                startActivity(calculatorIntent);
+                finish();
+
+            } else {
+                Toast.makeText(MainActivity.this, "invalid", Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(MainActivity.this,
+                    "ProgressDialog",
+                    "Wait for 10 seconds");
+        }
+
+
+        @Override
+        protected void onProgressUpdate(String... text) {
+            Toast.makeText(MainActivity.this, "i = "+text[0], Toast.LENGTH_SHORT).show();
+            Log.i("mainactivity","i="+text[0]);
+
         }
 
     }
