@@ -1,6 +1,7 @@
 package com.chetz.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -68,6 +69,9 @@ public class CalculatorActivity extends AppCompatActivity {
         if (id == R.id.logout) {
             Intent mainIntent = new Intent(CalculatorActivity.this, MainActivity.class);
             startActivity(mainIntent);
+            finish();
+            SharedPreferences sharedPreferences = getSharedPreferences("myapplication", MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
         }
 
         return super.onOptionsItemSelected(item);
