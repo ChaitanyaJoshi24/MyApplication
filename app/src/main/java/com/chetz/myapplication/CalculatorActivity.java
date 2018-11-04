@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,11 +68,12 @@ public class CalculatorActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout) {
+            SharedPreferences sharedPreferences = getSharedPreferences("myapplication", MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
             Intent mainIntent = new Intent(CalculatorActivity.this, MainActivity.class);
             startActivity(mainIntent);
             finish();
-            SharedPreferences sharedPreferences = getSharedPreferences("myapplication", MODE_PRIVATE);
-            sharedPreferences.edit().clear().commit();
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -104,9 +106,14 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     public void calculator(String numberOneStr, String numberTwoStr, Character operation) {
-        int numberOne = Integer.parseInt(numberOneStr);
-        int numberTwo = Integer.parseInt(numberTwoStr);
-        int result = 0;
+
+//        if(numberOneStr.equals(" ") || numberTwoStr.equals(" ")){
+//            Toast.makeText(CalculatorActivity.this, "Enter numbers", Toast.LENGTH_LONG).show();
+//        }
+
+        double numberOne = Double.parseDouble(numberOneStr);
+        double numberTwo = Double.parseDouble(numberTwoStr);
+        double result = 0;
 
         if (operation.equals('+')) {
             result = calc.addition(numberOne, numberTwo);
