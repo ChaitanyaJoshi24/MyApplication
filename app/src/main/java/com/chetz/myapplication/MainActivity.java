@@ -121,10 +121,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (result == true) {
                 Toast.makeText(MainActivity.this, "valid", Toast.LENGTH_LONG).show();
-                SharedPreferences sharedPreferences = getSharedPreferences("myapplication", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("is_login", true);
-                editor.commit();
+
+                MySharedPreference.getInstance(MainActivity.this).setBoolean(MySharedPreference.KEY_LOGIN, true);
 
                 Intent calculatorIntent = new Intent(MainActivity.this, CalculatorActivity.class);
                 startActivity(calculatorIntent);

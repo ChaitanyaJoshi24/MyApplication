@@ -15,12 +15,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                SharedPreferences sharedPreferences = getSharedPreferences("myapplication", MODE_PRIVATE);
-                boolean isLogin = sharedPreferences.getBoolean("is_login", false);
+                boolean isLogin = MySharedPreference.getInstance(SplashScreenActivity.this).getBoolean(MySharedPreference.KEY_LOGIN);
 
                 if(isLogin == true){
                     Intent calculatorIntent = new Intent(SplashScreenActivity.this, CalculatorActivity.class);
