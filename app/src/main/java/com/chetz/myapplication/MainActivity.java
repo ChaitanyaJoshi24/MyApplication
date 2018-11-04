@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -72,29 +73,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "ondestroy");
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
     @OnClick(R.id.btn_submit)
     public void submit() {
 
@@ -104,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class AsyncTaskRunner extends AsyncTask<String, String, Boolean >{
+    private class AsyncTaskRunner extends AsyncTask<String, String, Boolean> {
 
         private Boolean resp;
         ProgressDialog progressDialog;
@@ -117,19 +95,18 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     Thread.sleep(1000);
-                    if(i%3==0){
-                        publishProgress(""+i);
+                    if (i % 3 == 0) {
+                        publishProgress("" + i);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
-            if (username.equals(USERNAME) && password.equals(PASSWORD)){
+            if (username.equals(USERNAME) && password.equals(PASSWORD)) {
 
                 resp = true;
-            }
-            else{
+            } else {
                 resp = false;
             }
             // Calls onProgressUpdate()
@@ -170,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(String... text) {
-            Toast.makeText(MainActivity.this, "i = "+text[0], Toast.LENGTH_SHORT).show();
-            Log.i("mainactivity","i="+text[0]);
+            Toast.makeText(MainActivity.this, "i = " + text[0], Toast.LENGTH_SHORT).show();
+            Log.i("mainactivity", "i=" + text[0]);
 
         }
 

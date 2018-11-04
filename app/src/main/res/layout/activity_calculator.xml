@@ -26,43 +26,50 @@
         android:layout_height="50dp"
         android:layout_below="@+id/edt_boxone"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
-
+        android:layout_marginTop="20dp" />
 
 
     <Button
         android:id="@+id/btn_addition"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/txt_result"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="100dp"/>
+        android:text="+"
+        android:textSize="20sp" />
+
 
     <Button
         android:id="@+id/btn_subtraction"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/txt_result"
-        android:layout_toRightOf="@+id/btn_addition"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="16dp"/>
+        android:layout_toRightOf="@+id/btn_addition"
+        android:text="-"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btn_multiplication"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/btn_addition"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="100dp"/>
+        android:text="*"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btn_division"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/btn_addition"
-        android:layout_toRightOf="@id/btn_multiplication"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="16dp"/>
-
+        android:layout_toRightOf="@id/btn_multiplication"
+        android:text="/"
+        android:textSize="20sp" />
 
 </RelativeLayout>
