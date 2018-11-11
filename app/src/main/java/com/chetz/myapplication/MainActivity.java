@@ -14,6 +14,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
 
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -77,49 +88,85 @@ public class MainActivity extends AppCompatActivity {
     public void submit() {
 
         AsyncTaskRunner asyncTaskRunner = new AsyncTaskRunner();
-        asyncTaskRunner.execute(edtUsername.getText().toString(), edtPassword.getText().toString());
+        asyncTaskRunner.execute(edtUsername.getText().toString(), edtPassword.getText().toString(),"https://reqres.in/api/login");
 
 
     }
 
-    private class AsyncTaskRunner extends AsyncTask<String, String, Boolean> {
+    private class AsyncTaskRunner extends AsyncTask<String, Void, String> {
 
         private Boolean resp;
         ProgressDialog progressDialog;
 
-        protected Boolean doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             String username = params[0];
             String password = params[1];
+            String response = "";
 
-            for (int i = 0; i < 10; i++) {
+            try {
+                // This is getting the url from the string we passed in
+                URL url = new URL(params[2]);
 
-                try {
-                    Thread.sleep(1000);
-                    if (i % 3 == 0) {
-                        publishProgress("" + i);
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                // Create the urlConnection
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+
+                urlConnection.setDoInput(true);
+                urlConnection.setDoOutput(true);
+
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+
+                urlConnection.setRequestMethod("POST");
+
+
+                // OPTIONAL - Sets an authorization header
+                urlConnection.setRequestProperty("Authorization", "someAuthString");
+
+                JSONObject postJsonObject = new JSONObject();
+                postJsonObject.put("email", username);
+                postJsonObject.put("password", password);
+
+                Log.i("jasonobject",postJsonObject.toString());
+
+                // Send the post body{
+                    OutputStreamWriter writer = new OutputStreamWriter(urlConnection.getOutputStream());
+                    writer.write(postJsonObject.toString());
+                    writer.flush();
+
+
+                int statusCode = urlConnection.getResponseCode();
+
+                if (statusCode ==  200) {
+
+                    InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+
+                    response = getStringFromInputStream(inputStream);
+
+                    // From here you can convert the string to JSON with whatever JSON parser you like to use
+                    // After converting the string to JSON, I call my custom callback. You can follow this process too, or you can implement the onPostExecute(Result) method
+                } else {
+                    // Status code is not 200
+                    // Do something to handle the error
                 }
+
+            } catch (Exception e) {
+                Log.d(TAG, e.getLocalizedMessage());
             }
 
-            if (username.equals(USERNAME) && password.equals(PASSWORD)) {
 
-                resp = true;
-            } else {
-                resp = false;
-            }
             // Calls onProgressUpdate()
-            return resp;
+            return response;
         }
 
 
         @Override
-        protected void onPostExecute(Boolean result) {
+        protected void onPostExecute(String result) {
             // execution of result of Long time consuming operation
             progressDialog.dismiss();
 
-            if (result == true) {
+            if (result != null && !result.equals("")) {
+
+                Log.i("result",result);
                 Toast.makeText(MainActivity.this, "valid", Toast.LENGTH_LONG).show();
 
                 MySharedPreference.getInstance(MainActivity.this).setBoolean(MySharedPreference.KEY_LOGIN, true);
@@ -144,10 +191,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         @Override
-        protected void onProgressUpdate(String... text) {
+        protected void onProgressUpdate(Void... text) {
             Toast.makeText(MainActivity.this, "i = " + text[0], Toast.LENGTH_SHORT).show();
             Log.i("mainactivity", "i=" + text[0]);
 
+        }
+
+        public  String getStringFromInputStream(InputStream stream) throws IOException
+        {
+            int n = 0;
+            char[] buffer = new char[1024 * 4];
+            InputStreamReader reader = new InputStreamReader(stream, "UTF8");
+            StringWriter writer = new StringWriter();
+            while (-1 != (n = reader.read(buffer))) writer.write(buffer, 0, n);
+            return writer.toString();
         }
 
     }
