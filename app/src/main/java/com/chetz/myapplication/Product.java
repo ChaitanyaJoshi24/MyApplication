@@ -1,21 +1,45 @@
+
 package com.chetz.myapplication;
 
-import java.util.ArrayList;
+import java.util.List;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Product {
 
-    String productId;
-    String name;
-    String description;
-    int weight;
-    ArrayList<String> images;
-    String phone;
-    String web;
-    double price;
-    ArrayList<String> tags;
-
-    Dimension dimension;
-    WarehouseLocation location;
+    @SerializedName("productId")
+    @Expose
+    private String productId;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("weight")
+    @Expose
+    private String weight;
+    @SerializedName("images")
+    @Expose
+    private List<String> images = null;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+    @SerializedName("web")
+    @Expose
+    private String web;
+    @SerializedName("price")
+    @Expose
+    private Integer price;
+    @SerializedName("tags")
+    @Expose
+    private List<String> tags = null;
+    @SerializedName("dimensions")
+    @Expose
+    private Dimensions dimensions;
+    @SerializedName("warehouseLocation")
+    @Expose
+    private WarehouseLocation warehouseLocation;
 
     public String getProductId() {
         return productId;
@@ -41,19 +65,19 @@ public class Product {
         this.description = description;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
-    public ArrayList<String> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<String> images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 
@@ -73,36 +97,36 @@ public class Product {
         this.web = web;
     }
 
-    public double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public ArrayList<String> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(ArrayList<String> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
-    public Dimension getDimension() {
-        return dimension;
+    public Dimensions getDimensions() {
+        return dimensions;
     }
 
-    public void setDimension(Dimension dimension) {
-        this.dimension = dimension;
+    public void setDimensions(Dimensions dimensions) {
+        this.dimensions = dimensions;
     }
 
-    public WarehouseLocation getLocation() {
-        return location;
+    public WarehouseLocation getWarehouseLocation() {
+        return warehouseLocation;
     }
 
-    public void setLocation(WarehouseLocation location) {
-        this.location = location;
+    public void setWarehouseLocation(WarehouseLocation warehouseLocation) {
+        this.warehouseLocation = warehouseLocation;
     }
+
 }
-

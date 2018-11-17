@@ -1,23 +1,32 @@
+
 package com.chetz.myapplication;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class WarehouseLocation {
 
-    double latitude;
-    double longitude;
+    @SerializedName("latitude")
+    @Expose
+    private Double latitude;
+    @SerializedName("longitude")
+    @Expose
+    private Double longitude;
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+
 }

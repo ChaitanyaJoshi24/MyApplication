@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
                 MySharedPreference.getInstance(MainActivity.this).setBoolean(MySharedPreference.KEY_LOGIN, true);
 
-                Intent calculatorIntent = new Intent(MainActivity.this, CalculatorActivity.class);
+                Intent calculatorIntent = new Intent(MainActivity.this, ApiCallActivity.class);
                 startActivity(calculatorIntent);
                 finish();
 
