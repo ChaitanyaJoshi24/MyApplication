@@ -3,78 +3,209 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <EditText
-        android:id="@+id/edt_boxone"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="100dp"
-        android:digits="0123456789."
-        android:inputType="numberDecimal" />
-
-    <EditText
-        android:id="@+id/edt_boxtwo"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="100dp"
-        android:layout_toRightOf="@id/edt_boxone"
-        android:digits="0123456789."
-        android:inputType="numberDecimal" />
+    android:layout_height="match_parent"
+    android:background="#000000">
 
     <TextView
-        android:id="@+id/txt_result"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:id="@+id/edt_boxone"
+        android:layout_width="match_parent"
+        android:layout_height="420px"
+        android:layout_alignParentTop="true"
+        android:digits="0123456789."
+        android:inputType="numberDecimal"
+        android:textColor="#ffffff"
+        android:textSize="50sp"
+        android:gravity="end|bottom"
+        android:textAlignment="textEnd"
+        />
+
+
+    <Button
+        android:id="@+id/btn_clear"
+        android:layout_width="270px"
+        android:layout_height="220px"
         android:layout_below="@+id/edt_boxone"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
-
-
-    <Button
-        android:id="@+id/btn_addition"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/txt_result"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="20dp"
-        android:text="+"
-        android:background="@drawable/addition"
-        android:textSize="20sp" />
-
+        android:text="AC"
+        android:textSize="40sp"
+        android:background="#d0d0d0"/>
 
     <Button
-        android:id="@+id/btn_subtraction"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/txt_result"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/btn_addition"
-        android:text="-"
-        android:textSize="20sp" />
+        android:id="@+id/btn_sign"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/edt_boxone"
+        android:layout_toRightOf="@+id/btn_clear"
+        android:text="+/-"
+        android:textSize="40sp"
+        android:background="#d0d0d0"/>
 
     <Button
-        android:id="@+id/btn_multiplication"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/btn_addition"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="20dp"
-        android:text="*"
-        android:textSize="20sp" />
+        android:id="@+id/btn_modulo"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/edt_boxone"
+        android:layout_toRightOf="@+id/btn_sign"
+        android:text="%"
+        android:textSize="40sp"
+        android:background="#d0d0d0"/>
 
     <Button
         android:id="@+id/btn_division"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/btn_addition"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@id/btn_multiplication"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/edt_boxone"
+        android:layout_toRightOf="@+id/btn_modulo"
         android:text="/"
-        android:textSize="20sp" />
+        android:textSize="40sp"
+        android:background="#ffa500"/>
+
+    <Button
+        android:id="@+id/btn_seven"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_clear"
+        android:text="7"
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+    <Button
+        android:id="@+id/btn_eight"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_clear"
+        android:layout_toRightOf="@+id/btn_seven"
+        android:text="8"
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+    <Button
+        android:id="@+id/btn_nine"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_clear"
+        android:layout_toRightOf="@+id/btn_eight"
+        android:text="9"
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+    <Button
+        android:id="@+id/btn_multiplication"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_clear"
+        android:layout_toRightOf="@+id/btn_nine"
+        android:text="*"
+        android:textSize="40sp"
+        android:background="#ffa500"/>
+
+    <Button
+        android:id="@+id/btn_four"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_seven"
+        android:text="4"
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+    <Button
+        android:id="@+id/btn_five"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_seven"
+        android:layout_toRightOf="@+id/btn_four"
+        android:text="5"
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+    <Button
+        android:id="@+id/btn_six"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_seven"
+        android:layout_toRightOf="@+id/btn_five"
+        android:text="6"
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+    <Button
+        android:id="@+id/btn_subtraction"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_seven"
+        android:layout_toRightOf="@+id/btn_six"
+        android:text="-"
+        android:textSize="40sp"
+        android:background="#ffa500"/>
+
+    <Button
+        android:id="@+id/btn_one"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_four"
+        android:text="1"
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+    <Button
+        android:id="@+id/btn_two"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_four"
+        android:layout_toRightOf="@+id/btn_one"
+        android:text="2"
+        android:textSize="40sp"
+        android:background="#5e5e5e"
+        />
+
+    <Button
+        android:id="@+id/btn_three"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_four"
+        android:layout_toRightOf="@+id/btn_two"
+        android:text="3"
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+    <Button
+        android:id="@+id/btn_addition"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_four"
+        android:layout_toRightOf="@+id/btn_three"
+        android:text="+"
+        android:textSize="40sp"
+        android:background="#ffa500"/>
+
+    <Button
+        android:id="@+id/btn_zero"
+        android:layout_width="540px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_one"
+        android:text="0"
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+
+    <Button
+        android:id="@+id/btn_dot"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_one"
+        android:layout_toRightOf="@+id/btn_zero"
+        android:text="."
+        android:textSize="40sp"
+        android:background="#5e5e5e"/>
+
+    <Button
+        android:id="@+id/btn_equal"
+        android:layout_width="270px"
+        android:layout_height="220px"
+        android:layout_below="@+id/btn_one"
+        android:layout_toRightOf="@+id/btn_dot"
+        android:text="="
+        android:textSize="40sp"
+        android:background="#ffa500"/>
+
 
 </RelativeLayout>

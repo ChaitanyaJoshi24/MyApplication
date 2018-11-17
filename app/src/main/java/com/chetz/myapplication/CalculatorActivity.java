@@ -19,12 +19,9 @@ import butterknife.OnClick;
 
 
 public class CalculatorActivity extends AppCompatActivity {
+
     @BindView(R.id.edt_boxone)
-    EditText edtBoxOne;
-    @BindView(R.id.edt_boxtwo)
-    EditText edtBoxTwo;
-    @BindView(R.id.txt_result)
-    TextView txtResult;
+    TextView edtBoxOne;
     @BindView(R.id.btn_addition)
     Button btnAddition;
     @BindView(R.id.btn_subtraction)
@@ -33,6 +30,36 @@ public class CalculatorActivity extends AppCompatActivity {
     Button btnMultiplication;
     @BindView(R.id.btn_division)
     Button btnDivision;
+    @BindView(R.id.btn_one)
+    Button btnOne;
+    @BindView(R.id.btn_two)
+    Button btnTwo;
+    @BindView(R.id.btn_three)
+    Button btnThree;
+    @BindView(R.id.btn_four)
+    Button btnFour;
+    @BindView(R.id.btn_five)
+    Button btnFive;
+    @BindView(R.id.btn_six)
+    Button btnSix;
+    @BindView(R.id.btn_seven)
+    Button btnSeven;
+    @BindView(R.id.btn_eight)
+    Button btnEight;
+    @BindView(R.id.btn_nine)
+    Button btnNine;
+    @BindView(R.id.btn_zero)
+    Button btnZero;
+    @BindView(R.id.btn_clear)
+    Button btnClear;
+    @BindView(R.id.btn_sign)
+    Button btnSign;
+    @BindView(R.id.btn_modulo)
+    Button btnModulo;
+
+    boolean add,sub,mul,div;
+    String numberOneStr,numberTwoStr;
+
 
 
     Math calc = new Math();
@@ -80,55 +107,124 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.btn_one)
+    public void one(){
+        edtBoxOne.setText(edtBoxOne.getText() + "1");
+    }
+
+    @OnClick(R.id.btn_two)
+    public void two(){
+        edtBoxOne.setText(edtBoxOne.getText() + "2");
+    }
+
+    @OnClick(R.id.btn_three)
+    public void three(){
+        edtBoxOne.setText(edtBoxOne.getText() + "3");
+    }
+
+    @OnClick(R.id.btn_four)
+    public void four(){
+        edtBoxOne.setText(edtBoxOne.getText() + "4");
+    }
+
+    @OnClick(R.id.btn_five)
+    public void five(){
+        edtBoxOne.setText(edtBoxOne.getText() + "5");
+    }
+
+    @OnClick(R.id.btn_six)
+    public void six(){
+        edtBoxOne.setText(edtBoxOne.getText() + "6");
+    }
+
+    @OnClick(R.id.btn_seven)
+    public void seven(){
+        edtBoxOne.setText(edtBoxOne.getText() + "7");
+    }
+
+    @OnClick(R.id.btn_eight)
+    public void eight(){
+        edtBoxOne.setText(edtBoxOne.getText() + "8");
+    }
+
+    @OnClick(R.id.btn_nine)
+    public void nine(){
+        edtBoxOne.setText(edtBoxOne.getText() + "9");
+    }
+
+    @OnClick(R.id.btn_zero)
+    public void zero(){
+        edtBoxOne.setText(edtBoxOne.getText() + "0");
+    }
+
     @OnClick(R.id.btn_addition)
     public void addition() {
-        Character add = '+';
-        calculator(edtBoxOne.getText().toString(), edtBoxTwo.getText().toString(), add);
+        numberOneStr = edtBoxOne.getText().toString();
+        add = true;
+        edtBoxOne.setText(null);
 
     }
 
     @OnClick(R.id.btn_subtraction)
     public void subtraction() {
-        Character sub = '-';
-        calculator(edtBoxOne.getText().toString(), edtBoxTwo.getText().toString(), sub);
+        numberOneStr = edtBoxOne.getText().toString();
+        sub = true;
+        edtBoxOne.setText(null);
     }
 
     @OnClick(R.id.btn_multiplication)
     public void multiplication() {
-        Character mul = '*';
-        calculator(edtBoxOne.getText().toString(), edtBoxTwo.getText().toString(), mul);
+        numberOneStr = edtBoxOne.getText().toString();
+        mul = true;
+        edtBoxOne.setText(null);
     }
 
     @OnClick(R.id.btn_division)
     public void division() {
-        Character div = '/';
-        calculator(edtBoxOne.getText().toString(), edtBoxTwo.getText().toString(), div);
+        numberOneStr = edtBoxOne.getText().toString();
+        div = true;
+        edtBoxOne.setText(null);
     }
 
-    public void calculator(String numberOneStr, String numberTwoStr, Character operation) {
-
-//        if(numberOneStr.equals(" ") || numberTwoStr.equals(" ")){
-//            Toast.makeText(CalculatorActivity.this, "Enter numbers", Toast.LENGTH_LONG).show();
-//        }
-
+    @OnClick(R.id.btn_equal)
+    public void equal() {
+        numberTwoStr = edtBoxOne.getText().toString();
         double numberOne = Double.parseDouble(numberOneStr);
         double numberTwo = Double.parseDouble(numberTwoStr);
         double result = 0;
 
-        if (operation.equals('+')) {
+
+        if (add == true){
+
             result = calc.addition(numberOne, numberTwo);
-
-        } else if (operation.equals('-')) {
-            result = calc.subtraction(numberOne, numberTwo);
-
-        } else if (operation.equals('*')) {
-            result = calc.multiplication(numberOne, numberTwo);
-
-        } else if (operation.equals('/')) {
-            result = calc.division(numberOne, numberTwo);
-
+            add = false;
         }
-        txtResult.setText(String.valueOf((result)));
+
+        else if (sub == true){
+            result = calc.subtraction(numberOne, numberTwo);
+            sub = false;
+        }
+
+        else if (mul == true){
+            result = calc.multiplication(numberOne, numberTwo);
+            mul = false;
+        }
+
+        else if (div == true){
+            result = calc.division(numberOne, numberTwo);
+            div = false;
+        }
+        edtBoxOne.setText(String.valueOf((result)));
+    }
+
+    @OnClick(R.id.btn_clear)
+    public void clear() {
+        edtBoxOne.setText("");
+    }
+
+    @OnClick(R.id.btn_dot)
+    public void dot(){
+        edtBoxOne.setText(edtBoxOne.getText() + ".");
     }
 
 }

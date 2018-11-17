@@ -21,6 +21,7 @@ import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ApiCallActivity extends AppCompatActivity {
 
@@ -107,28 +108,57 @@ public class ApiCallActivity extends AppCompatActivity {
             try {
                 JSONArray productData = new JSONArray(result);
 
+                ArrayList<Product> productArrayList=new ArrayList<Product>();
+
                 for(int i=0;i<productData.length();i++){
+
+                    Product product = new Product();
+
                     JSONObject allData = productData.getJSONObject(i);
+
                     String firstName = allData.getString("name");
+                    product.setName(firstName);
+
                     Log.i("result",firstName);
+
                     String url = allData.getString("web");
+                    product.setWeb(url);
                     Log.i("result",url);
+
                     JSONArray image = allData.getJSONArray("images");
+                    ArrayList<String> imageArrayList = new ArrayList<>();
                     for(int j=0;j<image.length();j++){
                         String imagNumber = image.getString(j);
+                        imageArrayList.add(imagNumber);
+
                         Log.i("result",imagNumber);
                     }
+                    product.setImages(imageArrayList);
+
                     JSONArray tag = allData.getJSONArray("tags");
                     for(int j=0;j<tag.length();j++){
                         String tagNumber = tag.getString(j);
                         Log.i("result",tagNumber);
                     }
+
+                    WarehouseLocation location = new WarehouseLocation();
                     JSONObject warehouse = allData.getJSONObject("warehouseLocation");
                     double latitude = warehouse.getDouble("latitude");
+                    location.setLatitude(latitude);
                     double longitude = warehouse.getDouble("longitude");
+                    location.setLongitude(longitude);
+
+                    product.setLocation(location);
                     Log.i("result", String.valueOf(latitude));
                     Log.i("result", String.valueOf(longitude));
 
+                    productArrayList.add(product);
+
+                }
+
+                for (int i = 0; i < productArrayList.size(); i++) {
+
+                    Log.i("name",productArrayList.get(i).getName());
                 }
 
 

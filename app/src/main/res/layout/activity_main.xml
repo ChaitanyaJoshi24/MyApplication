@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#d0d0d0">
 
     <TextView
         android:id="@+id/txt_login"
@@ -14,7 +15,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:text="Login"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textColor="#5e5e5e"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/txt_username"
@@ -23,7 +26,8 @@
         android:layout_below="@id/txt_login"
         android:layout_marginLeft="16dp"
         android:text="Username:"
-        android:textSize="15sp" />
+        android:textSize="20sp"
+        android:textColor="#5e5e5e" />
 
     <EditText
         android:id="@+id/edt_username"
@@ -33,7 +37,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="16dp"
         android:layout_toRightOf="@id/txt_username"
-        android:textSize="15sp" />
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:background="#5e5e5e"/>
 
     <TextView
         android:id="@+id/txt_password"
@@ -41,19 +47,24 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edt_username"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
         android:text="Password:"
-        android:textSize="15sp" />
+        android:textSize="20sp"
+        android:textColor="#5e5e5e"/>
 
     <EditText
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edt_username"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/txt_password"
-        android:textSize="15sp"
-        android:inputType="textPassword"/>
+        android:textSize="20sp"
+        android:inputType="textPassword"
+        android:textColor="#ffffff"
+        android:background="#5e5e5e"/>
 
     <Button
         android:id="@+id/btn_submit"
@@ -62,6 +73,8 @@
         android:layout_below="@id/edt_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Submit" />
+        android:text="Submit"
+        android:textSize="20sp"
+        android:background="#d0d0d0"/>
 
 </RelativeLayout>
