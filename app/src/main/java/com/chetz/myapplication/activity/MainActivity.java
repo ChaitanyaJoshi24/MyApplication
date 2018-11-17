@@ -1,29 +1,17 @@
-package com.chetz.myapplication;
+package com.chetz.myapplication.activity;
 
 import android.app.ProgressDialog;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
 
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.chetz.myapplication.data.MySharedPreference;
+import com.chetz.myapplication.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.chetz.myapplication;
+package com.chetz.myapplication.data;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

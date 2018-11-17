@@ -1,4 +1,4 @@
-package com.chetz.myapplication;
+package com.chetz.myapplication.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;

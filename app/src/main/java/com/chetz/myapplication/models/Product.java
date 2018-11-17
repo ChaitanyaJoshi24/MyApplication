@@ -1,5 +1,5 @@
 
-package com.chetz.myapplication;
+package com.chetz.myapplication.models;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

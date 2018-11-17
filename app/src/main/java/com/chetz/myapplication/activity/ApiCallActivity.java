@@ -1,26 +1,14 @@
-package com.chetz.myapplication;
+package com.chetz.myapplication.activity;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.chetz.myapplication.APIClient;
+import com.chetz.myapplication.data.APIInterface;
+import com.chetz.myapplication.models.Product;
+import com.chetz.myapplication.R;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 import retrofit2.Call;

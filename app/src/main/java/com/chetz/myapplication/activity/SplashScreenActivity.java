@@ -1,10 +1,12 @@
-package com.chetz.myapplication;
+package com.chetz.myapplication.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.chetz.myapplication.data.MySharedPreference;
+import com.chetz.myapplication.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
