@@ -2,25 +2,37 @@ package com.chetz.myapplication.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Button;
 
-import com.chetz.myapplication.APIClient;
+
+import com.chetz.myapplication.adapter.ProductAdapter;
+import com.chetz.myapplication.data.APIClient;
 import com.chetz.myapplication.data.APIInterface;
 import com.chetz.myapplication.models.Product;
 import com.chetz.myapplication.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ApiCallActivity extends AppCompatActivity {
 
+    @BindView(R.id.view_recycler)
+    RecyclerView rvProduct;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_api_call);
+        ButterKnife.bind(this);
 
         getproduct();
 
@@ -215,6 +227,10 @@ public class ApiCallActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                 ArrayList<Product> productArrayList = response.body();
+                rvProduct.setLayoutManager(new LinearLayoutManager(ApiCallActivity.this));
+
+                ProductAdapter productAdapter = new ProductAdapter(ApiCallActivity.this, productArrayList);
+                rvProduct.setAdapter(productAdapter);
 
                 Log.i("apicall", "test = " + productArrayList.size());
             }
