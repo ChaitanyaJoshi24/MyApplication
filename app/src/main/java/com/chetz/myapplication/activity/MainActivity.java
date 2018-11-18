@@ -103,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
             String password = params[1];
 
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 5; i++) {
 
                 try {
                     Thread.sleep(1000);
-                    if (i % 3 == 0) {
+                    if (i % 5 == 0) {
                         publishProgress("" + i);
                     }
                 } catch (InterruptedException e) {

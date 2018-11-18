@@ -11,14 +11,18 @@ import android.widget.TextView;
 import com.chetz.myapplication.R;
 import com.chetz.myapplication.models.Product;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
 
     Context context;
     ArrayList<Product> productArrayList;
+    OnClickListner onClickListner;
 
-    public ProductAdapter(Context context, ArrayList<Product> productArrayList) {
+    public ProductAdapter(Context context, ArrayList<Product> productArrayList, OnClickListner onClickListner) {
+        this.onClickListner = onClickListner;
         this.context = context;
         this.productArrayList = productArrayList;
     }
@@ -32,9 +36,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i) {
+    public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, final int i) {
 
         productViewHolder.tvProductname.setText(productArrayList.get(i).getName());
+        productViewHolder.tvDescription.setText(productArrayList.get(i).getDescription());
+        productViewHolder.tvWeight.setText(productArrayList.get(i).getWeight());
+        productViewHolder.tvPrice.setText("$" +productArrayList.get(i).getPrice());
+        productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onClickListner != null){
+                    onClickListner.onItemClick(productArrayList.get(i));
+                }
+            }
+        });
 
     }
 
@@ -46,6 +61,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public class ProductViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvProductname;
+        TextView tvDescription;
+        TextView tvWeight;
+        TextView tvPrice;
 
 
 
@@ -53,6 +71,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             super(itemView);
 
             tvProductname = (TextView) itemView.findViewById(R.id.txt_productname);
+            tvDescription = (TextView) itemView.findViewById(R.id.txt_description);
+            tvWeight = (TextView) itemView.findViewById(R.id.txt_weight);
+            tvPrice = (TextView) itemView.findViewById(R.id.txt_price);
         }
+    }
+
+    public interface OnClickListner{
+
+        public void onItemClick(Product product);
+
+
     }
 }

@@ -1,10 +1,13 @@
 
 package com.chetz.myapplication.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Dimensions {
+public class Dimensions implements Parcelable {
 
     @SerializedName("length")
     @Expose
@@ -40,4 +43,36 @@ public class Dimensions {
         this.height = height;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeFloat(this.length);
+        dest.writeFloat(this.width);
+        dest.writeValue(this.height);
+    }
+
+    public Dimensions() {
+    }
+
+    protected Dimensions(Parcel in) {
+        this.length = in.readFloat();
+        this.width = in.readFloat();
+        this.height = (Double) in.readValue(Double.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Dimensions> CREATOR = new Parcelable.Creator<Dimensions>() {
+        @Override
+        public Dimensions createFromParcel(Parcel source) {
+            return new Dimensions(source);
+        }
+
+        @Override
+        public Dimensions[] newArray(int size) {
+            return new Dimensions[size];
+        }
+    };
 }

@@ -1,5 +1,6 @@
 package com.chetz.myapplication.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import com.chetz.myapplication.adapter.ProductAdapter;
 import com.chetz.myapplication.data.APIClient;
 import com.chetz.myapplication.data.APIInterface;
+import com.chetz.myapplication.data.DatabaseHelper;
 import com.chetz.myapplication.models.Product;
 import com.chetz.myapplication.R;
 
@@ -23,6 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ApiCallActivity extends AppCompatActivity {
+
+
 
     @BindView(R.id.view_recycler)
     RecyclerView rvProduct;
@@ -229,8 +233,21 @@ public class ApiCallActivity extends AppCompatActivity {
                 ArrayList<Product> productArrayList = response.body();
                 rvProduct.setLayoutManager(new LinearLayoutManager(ApiCallActivity.this));
 
-                ProductAdapter productAdapter = new ProductAdapter(ApiCallActivity.this, productArrayList);
+                ProductAdapter productAdapter = new ProductAdapter(ApiCallActivity.this, productArrayList, new ProductAdapter.OnClickListner() {
+                    @Override
+                    public void onItemClick(Product product) {
+
+                        Intent detailIntent = new Intent(ApiCallActivity.this, DetailProductActivity.class);
+                        detailIntent.putExtra(DetailProductActivity.KEY_PRODUCTMODEL,product);
+                        startActivity(detailIntent);
+                        finish();
+
+                    }
+                });
                 rvProduct.setAdapter(productAdapter);
+
+//                DatabaseHelper.getInstance(ApiCallActivity.this).insertProduct(productArrayList);
+//                DatabaseHelper.getInstance(ApiCallActivity.this).getProduct();
 
                 Log.i("apicall", "test = " + productArrayList.size());
             }
